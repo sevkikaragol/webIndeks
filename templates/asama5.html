@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block  body %}
+
+<br><br>
+<label for="basic-url">Karsilastirma yapilacak URL'i giriniz.</label>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    
+  </div>
+  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+</div>
+
+<label for="text-area">Web sitesi kümesinde bulunan URL'leri alt alta giriniz.</label>
+<div class="input-group">
+  <div class="input-group-prepend">
+  </div>
+  <textarea class="form-control" id="text-area" aria-label="With textarea"></textarea>
+</div>
+<br>
+<button type="button" class="btn btn-secondary btn-lg btn-block">Ara</button>
+
+
+{% endblock  body %}

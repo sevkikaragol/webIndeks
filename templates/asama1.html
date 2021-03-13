@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block  body %}
+<br><br>
+
+
+<form name=passdata action="/asama1" method="post">
+<label for="basic-url">Url'i giriniz.</label>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <button type="submit" value="submit" class="btn btn-secondary">Ara</button>
+  </div>
+  <input type="text" class="form-control" name="text-url"  aria-describedby="basic-addon3">
+</div>
+</form>
+
+{% if kontrol == True %}
+<ul>
+
+{% for i in liste  %}
+<li>{{i}}</li>
+{% endfor %}
+
+
+</ul>
+
+{% else %}
+
+{% endif %}
+
+{% endblock  body %}
