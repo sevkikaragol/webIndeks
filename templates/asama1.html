@@ -14,11 +14,13 @@
 </div>
 </form>
 
+
+
 {% if kontrol == True %}
-<ul>
+<ul class="list-group">
 
 {% for anahtar,deger in sozluk  %}
-<li>{{anahtar}} -> {{deger}} </li>
+<li class="list-group-item" >{{anahtar}} -> {{deger}} </li>
 {% endfor %}
 
 

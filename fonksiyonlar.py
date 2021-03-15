@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import trStopWords
 import operator
 
-#url = "https://www.ntvspor.net/futbol/sergio-aguero-icin-prensip-anlasmasina-varildi-604ddcd658469611d8ad7aaa"
+
 
 
 def kelimeFrekans(url):
@@ -69,6 +69,20 @@ def kelimeFrekans(url):
     kelimeSirali = sorted(kelimeSayisi.items(),key = operator.itemgetter(1),reverse = True)
 
     return kelimeSirali
+
+
+def anahtarKelime(sozluk):
+    sayac = 0
+    anahtarSozluk = {}
+
+    for kelime in sozluk:
+        if (sayac==5):
+            break
+
+        anahtarSozluk[kelime[0]] = kelime[1]
+        sayac+=1
+    return anahtarSozluk
+        
 
 
 

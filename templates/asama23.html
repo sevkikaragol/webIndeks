@@ -3,12 +3,15 @@
 {% block  body %}
 <br><br>
 
+<form name=passdata action="/asama23" method="post">
+
 <label for="basic-url">Karsilastirma yapilacak ilk URL'i giriniz.</label>
 <div class="input-group mb-3">
   <div class="input-group-prepend">
    
   </div>
-  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+  <input type="text" class="form-control" name="url1" aria-describedby="basic-addon3">
+
 </div>
 
 <label for="basic-url">Karsilastirma yapilacak ikinci URL'i giriniz.</label>
@@ -16,10 +19,54 @@
   <div class="input-group-prepend">
     
   </div>
-  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+  <input type="text" class="form-control" name="url2" aria-describedby="basic-addon3">
+  
 </div>
 
-<button type="button" class="btn btn-secondary btn-lg btn-block">Ara</button>
+<button type="submit" value="submit" class="btn btn-secondary btn-lg btn-block">Ara</button>
+
+</form>
+
+
+
+{% if kontrol == True %}
+
+
+<br><br><br>
+<div class="container">
+  <div class="row">
+    <div class="col">
+    <h3>&nbsp&nbsp&nbspIlk URL'in anahtar kelimeleri</h3>
+      <ul class="list-group">
+
+      {% for anahtar,deger in sozluk1.items()  %}
+       
+      <li class="list-group-item" >{{anahtar}} -> {{deger}} </li>
+      {% endfor %}
+
+      </ul>
+    </div>
+    <div class="col">
+    <h3>&nbsp&nbsp&nbspIkinci URL'in anahtar kelimeleri</h3>
+     <ul class="list-group">
+
+      {% for anahtar,deger in sozluk2.items()  %}
+      <li class="list-group-item" >{{anahtar}} -> {{deger}} </li>
+        
+      {% endfor %}
+
+      </ul>
+    </div>
+  </div>
+
+
+{% else %}
+
+{% endif %}
+
+
 
 
 {% endblock  body %}
+
+

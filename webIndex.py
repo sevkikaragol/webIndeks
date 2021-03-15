@@ -32,7 +32,21 @@ def getValue():
 #####asama23
 @app.route("/asama23")
 def asama23():
-    return render_template("asama23.html")
+    return render_template("asama23.html",kontrol=False)
+
+
+@app.route('/asama23',methods =['POST'])
+def getValue23():
+    url1 = request.form['url1']
+    url2 = request.form['url2']
+    sozluk1 = fs.anahtarKelime(fs.kelimeFrekans(url1))
+    sozluk2 = fs.anahtarKelime(fs.kelimeFrekans(url2))
+    
+
+    return render_template("asama23.html",kontrol=True,sozluk1=sozluk1,sozluk2=sozluk2)
+
+
+
 
 #####asama23
 
