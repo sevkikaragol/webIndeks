@@ -22,8 +22,8 @@ def asama1():
 @app.route('/asama1',methods =['POST'])
 def getValue():
     url = request.form['text-url']
-    liste = fs.parcala(url)
-    return render_template("asama1.html",kontrol=True,liste=liste)
+    sozluk = fs.kelimeFrekans(url)
+    return render_template("asama1.html",kontrol=True,sozluk=sozluk)
 
 
  #####asama1   
