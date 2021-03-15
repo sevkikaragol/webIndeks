@@ -84,6 +84,27 @@ def anahtarKelime(sozluk):
     return anahtarSozluk
         
 
+def benzerlikOrani(anahtarKelimeler,tumKelimeler):
+    #gelen veriler liste seklindedir. [(),(),()]
+    anahtarKelimeler = anahtarKelimeler[0:5]
+    tumKelimeler = tumKelimeler[0:5]
+
+    sayac = 0
+    kelimeSayisi = 0
+    for anahtarKelime in anahtarKelimeler:
+        for kelime in tumKelimeler:
+            if(anahtarKelime[0] == kelime[0]):
+                sayac+=(kelime[1]+anahtarKelime[1])
+                
+    
+    for kelime in tumKelimeler:
+        kelimeSayisi += kelime[1]
+    
+    for kelime in anahtarKelimeler:
+        kelimeSayisi += kelime[1]
+    
+    return ((float(sayac)/float(kelimeSayisi))*100.0)
+
 
 
 

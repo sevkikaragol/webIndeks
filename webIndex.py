@@ -41,9 +41,11 @@ def getValue23():
     url2 = request.form['url2']
     sozluk1 = fs.anahtarKelime(fs.kelimeFrekans(url1))
     sozluk2 = fs.anahtarKelime(fs.kelimeFrekans(url2))
+
+    oran = round(fs.benzerlikOrani(fs.kelimeFrekans(url1),fs.kelimeFrekans(url2)),2)
     
 
-    return render_template("asama23.html",kontrol=True,sozluk1=sozluk1,sozluk2=sozluk2)
+    return render_template("asama23.html",kontrol=True,sozluk1=sozluk1,sozluk2=sozluk2,oran=oran)
 
 
 

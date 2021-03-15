@@ -59,14 +59,45 @@
     </div>
   </div>
 
+   <!-- asama3 baslangic -->
+   <br><br>
+   <h3>Benzerlik Oranı</h3>
+   {% if oran >=75 %}
+
+   <div class="progress">
+  <div class="progress-bar bg-success" role="progressbar" style="width: {{oran}}%" aria-valuenow="{{oran}}" aria-valuemin="0" aria-valuemax="100">{{oran}}</div>
+  </div>
+   
+   {% elif oran >=50 %}
+   <div class="progress">
+  <div class="progress-bar bg-info" role="progressbar" style="width: {{oran}}%" aria-valuenow="{{oran}}" aria-valuemin="0" aria-valuemax="100">{{oran}}</div>
+  </div>
+
+   {% elif oran >=25 %}
+   <div class="progress">
+  <div class="progress-bar bg-warning" role="progressbar" style="width: {{oran}}%" aria-valuenow="{{oran}}" aria-valuemin="0" aria-valuemax="100">{{oran}}</div>
+  </div>
+
+   {% else %}
+   <div class="progress">
+  <div class="progress-bar bg-danger" role="progressbar" style="width: {{oran}}%" aria-valuenow="{{oran}}" aria-valuemin="0" aria-valuemax="100">{{oran}}</div>
+  </div>
+   
+   
+   {% endif %}
+   <br><br><br><br><br>
 
 {% else %}
 
 {% endif %}
 
 
+<!-- asama3 baslangic -->
 
 
 {% endblock  body %}
 
 
+{% block title %}
+Asama 2|3
+{% endblock title %}
