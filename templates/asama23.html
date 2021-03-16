@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block  body %}
-<br><br>
+<br>
 
 <form name=passdata action="/asama23" method="post">
 
@@ -39,7 +39,7 @@
     <h3>&nbsp&nbsp&nbspIlk URL'in anahtar kelimeleri</h3>
       <ul class="list-group">
 
-      {% for anahtar,deger in sozluk1.items()  %}
+      {% for anahtar,deger in sozluk1  %}
        
       <li class="list-group-item" >{{anahtar}} -> {{deger}} </li>
       {% endfor %}
@@ -50,7 +50,7 @@
     <h3>&nbsp&nbsp&nbspIkinci URL'in anahtar kelimeleri</h3>
      <ul class="list-group">
 
-      {% for anahtar,deger in sozluk2.items()  %}
+      {% for anahtar,deger in sozluk2  %}
       <li class="list-group-item" >{{anahtar}} -> {{deger}} </li>
         
       {% endfor %}

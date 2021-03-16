@@ -1,24 +1,27 @@
 {% extends "layout.html" %}
 
 {% block  body %}
-<br><br>
+<br>
+
+<form name=passdata action="/asama4" method="post">
+
 <label for="basic-url">Karsilastirma yapilacak URL'i giriniz.</label>
 <div class="input-group mb-3">
   <div class="input-group-prepend">
     
   </div>
-  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+  <input type="text" class="form-control" name="url1" aria-describedby="basic-addon3">
 </div>
 
 <label for="text-area">Web sitesi kümesinde bulunan URL'leri alt alta giriniz.</label>
 <div class="input-group">
   <div class="input-group-prepend">
   </div>
-  <textarea class="form-control" id="text-area" aria-label="With textarea"></textarea>
+  <textarea class="form-control" name="url2" aria-label="With textarea"></textarea>
 </div>
 <br>
-<button type="button" class="btn btn-secondary btn-lg btn-block">Ara</button>
-
+<button type="submit" class="btn btn-secondary btn-lg btn-block">Ara</button>
+</form>
 
 {% endblock  body %}
 

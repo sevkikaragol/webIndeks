@@ -11,10 +11,11 @@ def kelimeFrekans(url):
 
     def sembolTemizler(tumKelimeler):
         sembolsuzKelimeler = []
-        semboller = "!@$%^*()_{}\"<>,./;'[]-=:`~+|#?1234567890"
+        semboller = "!@$%^*()_{}\"<>,./;'[’]-=:`~+|#?1234567890"
+        
         for kelime in tumKelimeler:
-            for sembol in semboller:
-                if sembol in kelime:
+            for sembol in  semboller:
+                if sembol  in kelime:
                     kelime = kelime.replace(sembol,"")
 
             if(len(kelime) > 0):
@@ -26,11 +27,12 @@ def kelimeFrekans(url):
 
 
     soup = BeautifulSoup(r.content,"html.parser")
-
-    for kelimeGruplari in soup.find_all("p"):
+    
+    for kelimeGruplari in soup.find_all("body"):
         icerik = kelimeGruplari.text
         #print("************************ "+ icerik + " *********************************")
         kelimeler = icerik.lower().split()
+        
 
 
         for kelime in kelimeler:
@@ -73,13 +75,13 @@ def kelimeFrekans(url):
 
 def anahtarKelime(sozluk):
     sayac = 0
-    anahtarSozluk = {}
+    anahtarSozluk = []
 
     for kelime in sozluk:
         if (sayac==5):
             break
 
-        anahtarSozluk[kelime[0]] = kelime[1]
+        anahtarSozluk.append((kelime[0],kelime[1]))
         sayac+=1
     return anahtarSozluk
         
@@ -88,13 +90,17 @@ def benzerlikOrani(anahtarKelimeler,tumKelimeler):
     #gelen veriler liste seklindedir. [(),(),()]
     anahtarKelimeler = anahtarKelimeler[0:5]
     tumKelimeler = tumKelimeler[0:5]
-
+    print(anahtarKelimeler)
+    print(tumKelimeler)
+    
     sayac = 0
     kelimeSayisi = 0
     for anahtarKelime in anahtarKelimeler:
         for kelime in tumKelimeler:
             if(anahtarKelime[0] == kelime[0]):
                 sayac+=(kelime[1]+anahtarKelime[1])
+                
+            
                 
     
     for kelime in tumKelimeler:

@@ -1,3 +1,6 @@
+#Durak kelimeler 'Information Retrieval on Turkish Texts' makalesinden alınmıştır.
+#http://repository.bilkent.edu.tr/handle/11693/23211
+
 stopWords = ["ama","böyle","dolayısıyla","her","ki","olmak","sadece","yaptığı",
 "ancak","böylece","edecek","herhangi","kim","olması","siz","yaptığını",
 "arada","bu","eden","herkesin","kimse","olmayan","şey","yaptıkları",
