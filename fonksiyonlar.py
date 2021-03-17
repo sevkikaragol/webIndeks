@@ -11,9 +11,26 @@ def kelimeFrekans(url):
 
     def sembolTemizler(tumKelimeler):
         sembolsuzKelimeler = []
-        semboller = "!@$%^*()_{}\"<>,./;'[’]-=:`~+|#?1234567890"
+        semboller = "!@$%^*()_{}\"<>,./;'&[’]-=·›:`~+|#?1234567890"
+        #turkceKarakter= {"Ğ":"G","ğ":"g","Ü":"U","ü":"u","Ş":"S","İ":"I","Ö":"O","ö":"o","Ç":"C","ç":"c","ş":"s"}
         
         for kelime in tumKelimeler:
+            
+            kelime = kelime.replace("İ", "I")
+            kelime = kelime.replace("ı","i")
+            kelime = kelime.replace("Ç", "C")
+            kelime = kelime.replace("Ö", "O")
+            kelime = kelime.replace("Ğ", "G")
+            kelime = kelime.replace("Ş", "S")
+            kelime = kelime.replace("Ü", "U")
+            kelime = kelime.replace("ç", "c")
+            kelime = kelime.replace("ö", "o")
+            kelime = kelime.replace("ğ", "g")
+            kelime = kelime.replace("ş", "s")
+            kelime = kelime.replace("ü", "u")
+
+            kelime = kelime.lower()
+
             for sembol in  semboller:
                 if sembol  in kelime:
                     kelime = kelime.replace(sembol,"")
@@ -31,8 +48,8 @@ def kelimeFrekans(url):
     for kelimeGruplari in soup.find_all("body"):
         icerik = kelimeGruplari.text
         #print("************************ "+ icerik + " *********************************")
-        kelimeler = icerik.lower().split()
-        
+        #kelimeler = icerik.lower().split()
+        kelimeler = icerik.split()
 
 
         for kelime in kelimeler:
@@ -50,8 +67,7 @@ def kelimeFrekans(url):
 
 
 
-    #for i in tumKelimeler:
-    # print(i)
+
 
     def sozlukOlustur(tumKelimeler):
         kelimeSayisi = {}
@@ -78,7 +94,7 @@ def anahtarKelime(sozluk):
     anahtarSozluk = []
 
     for kelime in sozluk:
-        if (sayac==5):
+        if (sayac==7):
             break
 
         anahtarSozluk.append((kelime[0],kelime[1]))
@@ -88,8 +104,8 @@ def anahtarKelime(sozluk):
 
 def benzerlikOrani(anahtarKelimeler,tumKelimeler):
     #gelen veriler liste seklindedir. [(),(),()]
-    anahtarKelimeler = anahtarKelimeler[0:5]
-    tumKelimeler = tumKelimeler[0:5]
+    anahtarKelimeler = anahtarKelimeler[0:7]
+    tumKelimeler = tumKelimeler[0:7]
     print(anahtarKelimeler)
     print(tumKelimeler)
     
