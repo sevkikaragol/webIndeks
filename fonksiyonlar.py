@@ -13,19 +13,9 @@ def sembolTemizler(tumKelimeler):
 
     for kelime in tumKelimeler:
 
-        kelime = kelime.replace("İ", "I")
-        kelime = kelime.replace("ı", "i")
-        kelime = kelime.replace("Ç", "C")
-        kelime = kelime.replace("Ö", "O")
-        kelime = kelime.replace("Ğ", "G")
-        kelime = kelime.replace("Ş", "S")
-        kelime = kelime.replace("Ü", "U")
-        kelime = kelime.replace("ç", "c")
-        kelime = kelime.replace("ö", "o")
-        kelime = kelime.replace("ğ", "g")
-        kelime = kelime.replace("ş", "s")
-        kelime = kelime.replace("ü", "u")
-
+        kelime = kelime.replace("İ", "i")
+        kelime = kelime.replace("I", "ı")
+       
         kelime = kelime.lower()
 
         for sembol in semboller:
