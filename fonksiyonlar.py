@@ -110,7 +110,7 @@ def anahtarKelime(sozluk, url):
     return anahtarSozluk
 # -------------------------------------------------------------------------------------------------------------------------------------
 
-
+#asama 3 icin kullanilmistir.
 def benzerlikOrani(anahtarKelimeler, tumKelimeler):
     # gelen veriler liste seklindedir. [(),(),()]
     sayac = 0
@@ -129,3 +129,101 @@ def benzerlikOrani(anahtarKelimeler, tumKelimeler):
     return ((float(sayac)/float(kelimeSayisi))*100.0)
 
     # -------------------------------------------------------------------------------------------------------------------------------------
+def asama4(anaUrl,siteKumesiString):
+
+    genelListe = list()
+
+#>>>>>>>>>>>>>>>>
+    def child(url):
+        if url.endswith("/"):
+            url = url[0:len(url)-1]
+
+        r = requests.get(url)
+        soup = BeautifulSoup(r.content,"html.parser")
+        linkler = soup.find_all("a")
+        liste = list()
+
+        for link in linkler:
+            if(str(link.get("href")).find(url) == 0):
+                siteUrl=str(link.get("href"))
+
+                if siteUrl.endswith("/"):
+                    siteUrl = siteUrl[0:len(siteUrl)-1]
+                
+
+                if((siteUrl not in liste) and (url!=siteUrl)):
+                    liste.append(siteUrl)
+
+        sayac = url.count("/") #parent url '/' sayisi
+        liste2 = list()
+
+        for i in liste: # i -> listede olan url'ler
+            if (i.count("/") == sayac+1):
+                liste2.append(i)
+
+        return liste2 
+#>>>>>>>>>>>>>>>>>>>>>
+
+
+    siteListesi = siteKumesiString.split("\n")
+    a = 0
+    for i in siteListesi:
+        siteListesi[a]=siteListesi[a].replace("\r","")
+        a+=1
+
+
+#buyuk dongu 
+    sozluk1 =anahtarKelime(kelimeFrekans(anaUrl),anaUrl)
+    for parentUrl in siteListesi:
+        oran1=0
+        oran2=0
+        sozluk2 = anahtarKelime(kelimeFrekans(parentUrl),parentUrl)
+        anaOran = round(benzerlikOrani(sozluk1,sozluk2),2)
+
+        
+        childList1 = child(parentUrl) #butun katmanlarin oldugu cocuklar
+        childList2 = list()
+
+        for firstChild in childList1:
+            for i in child(firstChild):
+                childList2.append(i)
+        
+        for cl1Url in childList1:
+            cl1Anahtarlar = anahtarKelime(kelimeFrekans(cl1Url),cl1Url)
+            oran1 += round(benzerlikOrani(sozluk1,cl1Anahtarlar),2)
+        
+        oran1=oran1/len(childList1)
+
+        for cl2Url in childList2:
+            cl2Anahtarlar = anahtarKelime(kelimeFrekans(cl2Url),cl2Url)
+            oran2 += round(benzerlikOrani(sozluk1,cl2Anahtarlar),2)
+        
+        oran2=oran2/len(childList2)
+
+        sonOran = round((anaOran*16/21)+(oran1*4/21)+(oran2*1/21),2)
+
+
+
+        genelListe.append(((parentUrl,sonOran),childList1,childList2))
+
+    print(genelListe)
+    return genelListe #asama4 fonksiyonu sonu
+
+
+def agacYazdir(genelListe):
+    for i, j, k in genelListe:
+        print(i[0],"-> ",i[1])
+        for l in j:
+            print("    "+l)
+            for m in k:
+                if (m.find(l) == 0):
+                    print("        "+m)
+
+
+
+
+
+            
+
+    
+        

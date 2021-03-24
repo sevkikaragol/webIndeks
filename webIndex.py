@@ -78,7 +78,11 @@ def getValue4():
         flash("Lütfen URL girişi yapınız.", "danger")
         return render_template("asama4.html", kontrol=False)
 
-    return render_template("asama4.html")
+    agacListe = fs.asama4(url1,url2) 
+    #fs.agacYazdir(agacListe)
+
+
+    return render_template("asama4.html",kontrol=True,agacListe=agacListe)
 
 
 # asama4
