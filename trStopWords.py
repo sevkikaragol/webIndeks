@@ -17,7 +17,7 @@ stopWords = ["ama","böyle","dolayısıyla","her","ki","olmak","sadece","yaptı�
 "biz","değil","hangi","kendini","olduğunu","öyle","yapılması",
 "bize","diğer","hatta","kendisi","olduklarını","oysa","yapıyor",
 "bizi","diye","hem","kendisine","olmadı","pek","yapmak",
-"bizim","dolayı","henüz","kendisini","olmadığı","rağmen","yaptı","en","kaç"]
+"bizim","dolayı","henüz","kendisini","olmadığı","rağmen","yaptı","en","kaç","herşey","sa"]
 
 def isStopWord(parameter):
     for word in stopWords:

@@ -82,16 +82,23 @@ def kelimeFrekans(url):
 def anahtarKelime(sozluk, url):
     r = requests.get(url)
     soup = BeautifulSoup(r.content, "html.parser")
-    titleString = soup.title.string.split()
-    titleString = sembolTemizler(titleString)
 
-    kopya = titleString.copy()
+    titleString = soup.title.string
 
-    for kelime in kopya:
-        if(trStopWords.isStopWord(kelime)):
-            titleString.remove(kelime)
+    if soup.title.string is not None:
+        titleString = soup.title.string.split()
+
+        titleString = sembolTemizler(titleString)
+
+        kopya = titleString.copy()
+
+        for kelime in kopya:
+            if(trStopWords.isStopWord(kelime)):
+                titleString.remove(kelime)
+
 
     sayac = 0
+    titleSayac=0
     anahtarSozluk = []
 
     for kelime in sozluk:
@@ -103,9 +110,18 @@ def anahtarKelime(sozluk, url):
     for i, j in anahtarSozluk:
         ornekList.append(i)
 
-    for kelime in titleString:
-        if(kelime not in ornekList):
-            anahtarSozluk.append((kelime, int(anahtarSozluk[0][1]*1/4)))
+    if soup.title.string is not None:
+        for kelime in titleString:
+            if titleSayac==5:
+                break
+            if(kelime not in ornekList):
+                anahtarSozluk.append((kelime, int(anahtarSozluk[0][1]*1/4)))
+                titleSayac+=1
+
+
+            
+            if(kelime not in ornekList):
+                ornekList.append(kelime)
 
     return anahtarSozluk
 # -------------------------------------------------------------------------------------------------------------------------------------
@@ -157,6 +173,7 @@ def asama4(anaUrl,siteKumesiString):
         sayac = url.count("/") #parent url '/' sayisi
         liste2 = list()
 
+        
         for i in liste: # i -> listede olan url'ler
             if (i.count("/") == sayac+1):
                 liste2.append(i)
@@ -174,12 +191,14 @@ def asama4(anaUrl,siteKumesiString):
 
 #buyuk dongu 
     sozluk1 =anahtarKelime(kelimeFrekans(anaUrl),anaUrl)
+    tumAnahtarKelimeler = list()
+
     for parentUrl in siteListesi:
         oran1=0
         oran2=0
         sozluk2 = anahtarKelime(kelimeFrekans(parentUrl),parentUrl)
         anaOran = round(benzerlikOrani(sozluk1,sozluk2),2)
-
+        tumAnahtarKelimeler.append((parentUrl,sozluk2))
         
         childList1 = child(parentUrl) #butun katmanlarin oldugu cocuklar
         childList2 = list()
@@ -191,33 +210,56 @@ def asama4(anaUrl,siteKumesiString):
         for cl1Url in childList1:
             cl1Anahtarlar = anahtarKelime(kelimeFrekans(cl1Url),cl1Url)
             oran1 += round(benzerlikOrani(sozluk1,cl1Anahtarlar),2)
-        
-        oran1=oran1/len(childList1)
+            tumAnahtarKelimeler.append((cl1Url,cl1Anahtarlar))
+
+        if len(childList1)==0:
+            oran1=0
+        else:
+            oran1=oran1/len(childList1)
 
         for cl2Url in childList2:
             cl2Anahtarlar = anahtarKelime(kelimeFrekans(cl2Url),cl2Url)
             oran2 += round(benzerlikOrani(sozluk1,cl2Anahtarlar),2)
+            tumAnahtarKelimeler.append((cl2Url,cl2Anahtarlar))
         
-        oran2=oran2/len(childList2)
+        if len(childList2)==0:
+            oran2=0
+        else:
+            oran2=oran2/len(childList2)
+        
+        if len(childList1)==0 and len(childList2)==0:
+            sonOran = anaOran
+        else:
+            sonOran = round((anaOran*16/21)+(oran1*4/21)+(oran2*1/21),2)
 
-        sonOran = round((anaOran*16/21)+(oran1*4/21)+(oran2*1/21),2)
+
+        """for i,j in tumAnahtarKelimeler:
+            print(i,"->",j)"""
+
+        genelListe.append((parentUrl,sonOran,childList1,childList2))
+
+    """print(genelListe)"""
+    return (sorted(genelListe, key = lambda x: x[1],reverse=True),tumAnahtarKelimeler)  # sorts in place- asama4 fonksiyonu sonu
 
 
 
-        genelListe.append(((parentUrl,sonOran),childList1,childList2))
-
-    print(genelListe)
-    return genelListe #asama4 fonksiyonu sonu
-
-
-def agacYazdir(genelListe):
-    for i, j, k in genelListe:
-        print(i[0],"-> ",i[1])
-        for l in j:
-            print("    "+l)
-            for m in k:
-                if (m.find(l) == 0):
-                    print("        "+m)
+def agacYazdir(genelListe,anahtarlar):
+    for i, j, k, l in genelListe:
+        print(i,"-> ",j)
+        for a,b in anahtarlar:
+            if a == i:
+                print(b)
+        for x in k:
+            print("    "+x)
+            for a,b in anahtarlar:
+                if a == x:
+                    print(b)
+            for y in l:
+                if (y.find(x) == 0):
+                    print("        "+y)
+                    for a,b in anahtarlar:
+                        if a == y:
+                            print(b)
 
 
 

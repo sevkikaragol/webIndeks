@@ -79,10 +79,10 @@ def getValue4():
         return render_template("asama4.html", kontrol=False)
 
     agacListe = fs.asama4(url1,url2) 
-    #fs.agacYazdir(agacListe)
+    #fs.agacYazdir(agacListe[0],agacListe[1])
 
 
-    return render_template("asama4.html",kontrol=True,agacListe=agacListe)
+    return render_template("asama4.html",kontrol=True,agacListe=agacListe[0],anahtarKelimeler=agacListe[1])
 
 
 # asama4
