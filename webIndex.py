@@ -62,7 +62,7 @@ def getValue23():
 # asama23
 
 
-# asama4
+# asama45
 @ app.route("/asama4")
 def asama4():
     return render_template("asama4.html")
@@ -78,36 +78,14 @@ def getValue4():
         flash("Lütfen URL girişi yapınız.", "danger")
         return render_template("asama4.html", kontrol=False)
 
-    agacListe = fs.asama4(url1,url2) 
-    #fs.agacYazdir(agacListe[0],agacListe[1])
+    agacListe = fs.asama4(url1, url2)
+    # fs.agacYazdir(agacListe[0],agacListe[1])
+
+    return render_template("asama4.html", kontrol=True, agacListe=agacListe[0], anahtarKelimeler=agacListe[1])
 
 
-    return render_template("asama4.html",kontrol=True,agacListe=agacListe[0],anahtarKelimeler=agacListe[1])
+# asama45
 
 
-# asama4
-
-
-# asama5
-
-@ app.route("/asama5")
-def asama5():
-    return render_template("asama5.html")
-
-
-@ app.route('/asama5', methods=['POST'])
-def getValue5():
-
-    url1 = request.form['url1']
-    url2 = request.form['url2']
-
-    if (len(url1) == 0 or len(url2) == 0):
-        flash("Lütfen URL girişi yapınız.", "danger")
-        return render_template("asama5.html", kontrol=False)
-
-    return render_template("asama5.html")
-
-
-# asama5
 if __name__ == "__main__":
     app.run(debug=True)
